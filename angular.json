@@ -169,5 +169,7 @@
             }
         }
     },
-    "defaultProject": "ngx-guided-tour-demo"
+    "cli": {
+      "analytics": false
+    }
 }
