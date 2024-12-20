@@ -19,6 +19,7 @@ import { WindowRefService } from "./windowref.service";
         <div *ngIf="currentTourStep && !isOrbShowing">
             <div class="guided-tour-user-input-mask" (click)="backdropClick($event)"></div>
             <div class="guided-tour-spotlight-overlay"
+                [ngClass]="{ 'no-fill': !backdropEnabled }"
                 [style.top.px]="overlayTop"
                 [style.left.px]="overlayLeft"
                 [style.height.px]="overlayHeight"
@@ -98,14 +99,14 @@ import { WindowRefService } from "./windowref.service";
     encapsulation: ViewEncapsulation.None
 })
 export class GuidedTourComponent implements AfterViewInit, OnDestroy {
-    @Input() public topOfPageAdjustment ?= 0;
-    @Input() public tourStepWidth ?= 300;
-    @Input() public minimalTourStepWidth ?= 200;
-    @Input() public skipText ?= 'Skip';
-    @Input() public nextText ?= 'Next';
-    @Input() public doneText ?= 'Done';
-    @Input() public closeText ?= 'Close';
-    @Input() public backText ?= 'Back';
+    @Input() public topOfPageAdjustment? = 0;
+    @Input() public tourStepWidth? = 300;
+    @Input() public minimalTourStepWidth? = 200;
+    @Input() public skipText? = 'Skip';
+    @Input() public nextText? = 'Next';
+    @Input() public doneText? = 'Done';
+    @Input() public closeText? = 'Close';
+    @Input() public backText? = 'Back';
     @Input() public progressIndicatorLocation?: ProgressIndicatorLocation = ProgressIndicatorLocation.InsideNextButton;
     @Input() public progressIndicator?: TemplateRef<any> = undefined;
     @ViewChild('tourStep', { static: false }) public tourStep: ElementRef;
@@ -289,8 +290,12 @@ export class GuidedTourComponent implements AfterViewInit, OnDestroy {
     private isBottom(): boolean {
         return this.currentTourStep.orientation
             && (this.currentTourStep.orientation === Orientation.Bottom
-            || this.currentTourStep.orientation === Orientation.BottomLeft
-            || this.currentTourStep.orientation === Orientation.BottomRight);
+                || this.currentTourStep.orientation === Orientation.BottomLeft
+                || this.currentTourStep.orientation === Orientation.BottomRight);
+    }
+
+    public get backdropEnabled(): boolean {
+        return this.currentTourStep.showBackdrop ?? true;
     }
 
     public get topPosition(): number {

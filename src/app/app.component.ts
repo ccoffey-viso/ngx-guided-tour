@@ -18,7 +18,8 @@ export class AppComponent {
                 title: 'Welcome to the Guided Tour Demo',
                 selector: '.demo-title',
                 content: 'Step 1',
-                orientation: Orientation.Bottom
+                orientation: Orientation.Bottom,
+                showBackdrop: false
             },
             {
                 title: 'General page step',

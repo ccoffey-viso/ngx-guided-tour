@@ -20,6 +20,8 @@ export interface TourStep {
     useHighlightPadding?: boolean;
     /** Adds padding around tour highlighting in pixels, this overwrites the default for this step. Is not dependent on useHighlightPadding being true */
     highlightPadding?: number;
+    /** Enable/disable backdrop. **/
+    showBackdrop?: boolean;
 }
 
 export interface GuidedTour {
